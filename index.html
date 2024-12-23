@@ -1,0 +1,78 @@
+<!--
+  Created by yousef on 12/23/2024 at 2:44 PM.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workflow Dispatcher</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="container">
+    <h1>Workflow Dispatcher</h1>
+    <form id="dispatch-form">
+        <div class="form-row">
+            <div class="input-group">
+                <label for="owner">Owner:</label>
+                <input type="text" id="owner" required>
+            </div>
+            <div class="input-group">
+                <label for="repo">Repository:</label>
+                <input type="text" id="repo" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="workflow">Workflow File:</label>
+            <input type="text" id="workflow" required>
+        </div>
+
+        <div class="form-row">
+            <label for="ref">Branch (Ref):</label>
+            <input type="text" id="ref" required>
+        </div>
+
+        <div class="form-row">
+            <label for="pat">Personal Access Token (PAT):</label>
+            <input type="password" id="pat" required>
+            <div class="theme-toggle">
+                <input type="checkbox" id="save-pat">
+                <label class="toggleSwitch" for="save-pat"></label>
+                <span>Save PAT in local storage</span>
+            </div>
+        </div>
+
+        <div id="payload-container" class="form-row">
+            <label>Payload:</label>
+            <button type="button" class="primary-button" id="add-payload-field">Add Field</button>
+        </div>
+
+        <div class="form-row theme-toggle">
+            <input type="checkbox" id="log-history">
+            <label class="toggleSwitch" for="log-history"></label>
+            <span>Log history in local storage</span>
+        </div>
+
+        <button class="button">
+            <svg
+                    viewBox="0 0 16 16"
+                    class="bi bi-lightning-charge-fill"
+                    fill="currentColor"
+                    height="16"
+                    width="16"
+                    xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                        d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"
+                ></path></svg
+            >Dispatch Workflow
+        </button>
+    </form>
+    <p id="status"></p>
+</div>
+
+<script src="dist/main.js" type="module"></script>
+</body>
+</html>
