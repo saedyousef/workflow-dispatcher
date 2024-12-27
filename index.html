@@ -11,66 +11,106 @@
 </head>
 <body>
 <div class="container">
-    <h1>Workflow Dispatcher</h1>
-    <form id="dispatch-form">
-        <div class="form-row">
-            <div class="input-group">
-                <label for="owner">Owner:</label>
-                <input type="text" id="owner" required>
+    <div class="form-container">
+        <h2>Workflow Dispatcher</h2>
+        <form id="dispatch-form">
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="owner">Owner</label><input type="text" id="owner" placeholder="Owner" required>
+                </div>
+                <div class="input-group">
+                    <label for="repo">Repository</label><input type="text" id="repo" placeholder="Repository" required>
+                </div>
             </div>
-            <div class="input-group">
-                <label for="repo">Repository:</label>
-                <input type="text" id="repo" required>
+
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="workflow">Workflow File</label>
+                    <input type="text" id="workflow" placeholder="Workflow file e.g: deploy.yml" required>
+                </div>
+                <div class="input-group">
+                    <label for="ref">Branch (ref)</label>
+                    <input type="text" id="ref" placeholder="Branch (Ref) e.g: master" required>
+                </div>
             </div>
-        </div>
 
-        <div class="form-row">
-            <label for="workflow">Workflow File:</label>
-            <input type="text" id="workflow" required>
-        </div>
-
-        <div class="form-row">
-            <label for="ref">Branch (Ref):</label>
-            <input type="text" id="ref" required>
-        </div>
-
-        <div class="form-row">
-            <label for="pat">Personal Access Token (PAT):</label>
-            <input type="password" id="pat" required>
-            <div class="theme-toggle">
-                <input type="checkbox" id="save-pat">
-                <label class="toggleSwitch" for="save-pat"></label>
-                <span>Save PAT in local storage</span>
+            <div class="form-row">
+                <div class="input-group">
+                    <label for="pat">GitHub Personal Access Token (PAT)</label>
+                    <input type="password" id="pat" placeholder="Personal Access Token (PAT)" required>
+                </div>
             </div>
-        </div>
 
-        <div id="payload-container" class="form-row">
-            <label>Payload:</label>
-            <button type="button" class="primary-button" id="add-payload-field">Add Field</button>
-        </div>
+            <div class="form-row">
+                <div class="theme-toggle in">
+                    <input type="checkbox" id="save-pat">
+                    <label class="toggleSwitch" for="save-pat"></label>
+                    <span>Save PAT <small>(For future use)</small></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-row theme-toggle">
+                    <input type="checkbox" id="log-history">
+                    <label class="toggleSwitch" for="log-history"></label>
+                    <span>Log workflow dispatch <small>(in local storage)</small></span>
+                </div>
+            </div>
+            <div class="form-row">
 
-        <div class="form-row theme-toggle">
-            <input type="checkbox" id="log-history">
-            <label class="toggleSwitch" for="log-history"></label>
-            <span>Log history in local storage</span>
-        </div>
+                <button class="Btn cssbuttons-io-button" id="add-payload-field" type="button">
 
-        <button class="button">
-            <svg
-                    viewBox="0 0 16 16"
-                    class="bi bi-lightning-charge-fill"
-                    fill="currentColor"
-                    height="16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                        d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"
-                ></path></svg
-            >Dispatch Workflow
-        </button>
-    </form>
-    <p id="status"></p>
+                    <div class="sign">+</div>
+
+                    <div class="text">Add Payload</div>
+                </button>
+            </div>
+            <div id="payload-container" class="form-row">
+
+            </div>
+
+            <button class="button">
+                <svg
+                        viewBox="0 0 16 16"
+                        class="bi bi-lightning-charge-fill"
+                        fill="currentColor"
+                        height="16"
+                        width="16"
+                        xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                            d="M11.251.068a.5.5 0 0 1 .227.58L9.677 6.5H13a.5.5 0 0 1 .364.843l-8 8.5a.5.5 0 0 1-.842-.49L6.323 9.5H3a.5.5 0 0 1-.364-.843l8-8.5a.5.5 0 0 1 .615-.09z"
+                    ></path></svg
+                >Dispatch Workflow
+            </button>
+        </form>
+    </div>
+    <div id="dispatch-history-container">
+        <h2>History</h2>
+        <table id="dispatch-history-table">
+            <thead>
+            <tr>
+                <th>Owner</th>
+                <th>Repo</th>
+                <th>Workflow</th>
+                <th>Ref</th>
+                <th>Status</th>
+                <th>Payload</th>
+                <th>Error Message</th>
+                <th>Timestamp</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="loading-container hidden">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
 </div>
 
 <script src="dist/main.js" type="module"></script>

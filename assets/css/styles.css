@@ -9,14 +9,9 @@ body {
     background-color: #f4f4f4;
 }
 
-.container {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 
 form {
+    flex: 1;
     display: flex;
     flex-direction: column;
 }
@@ -30,17 +25,6 @@ input, textarea, button {
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
-}
-
-.primary-button {
-    background: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-.primary-button:hover {
-    background: #0056b3;
 }
 
 /* From Uiverse.io by milegelu */
@@ -147,12 +131,18 @@ input[type="checkbox"]:checked + label {
 
 /* Wider container */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    margin-top: 70px;
+    max-width: 90%;
+    width: 100%;
+    display: flex;
+    flex-direction: row; /* Align form and table horizontally */
+    gap: 30px; /* Space between form and table */
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 100vh; /* Limit the height to the viewport */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 /* Form rows */
@@ -179,7 +169,6 @@ label {
 input[type="text"],
 input[type="password"],
 button {
-    width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -201,4 +190,447 @@ button {
 #add-payload-field {
     margin-top: 5px;
     align-self: flex-start;
+}
+
+
+.remove-payload-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    border: 0 solid transparent;
+    background-color: rgba(100,77,237,0.08);
+    border-radius: 1.25em;
+    transition: all 0.2s linear;
+}
+
+.remove-payload-field:hover {
+    box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
+    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
+    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
+    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
+    99px 72px 143px rgba(0, 0, 0, 0.08);
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 4em;
+    background-color: rgba(0, 0, 0, 0.253);
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 25%;
+    left: 110%;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent rgba(0, 0, 0, 0.253) transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+/* Align the payload fields in one row with proper spacing */
+.payload-field {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between inputs and the remove button */
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+/* Make the inputs take equal space */
+.payload-field input {
+    flex: 1; /* Inputs take remaining space in the row */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+/* Adjust responsiveness */
+@media (max-width: 600px) {
+    .payload-field {
+        flex-wrap: wrap; /* Wrap inputs and button on smaller screens */
+    }
+
+    .payload-field input {
+        flex: 1 1 100%; /* Full width for inputs on small screens */
+    }
+
+    .remove-payload-field {
+        margin-top: 10px; /* Add spacing below inputs */
+        flex: 0 0 auto; /* Keep the button size fixed */
+    }
+}
+
+/* From Uiverse.io by Yaya12085 */
+.Btn {
+    --bezier: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --edge-light: hsla(0, 0%, 50%, 0.8);
+    --text-light: rgba(255, 255, 255, 0.4);
+    --back-color: 240, 40%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border-radius: calc(45px/2);
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    /*background: linear-gradient(144deg,#af40ff,#5b42f3 50%,#00ddeb);*/
+    background: linear-gradient(
+            140deg,
+            hsla(var(--back-color), 50%, 1) min(2em, 20%),
+            hsla(var(--back-color), 50%, 0.6) min(8em, 100%)
+    );;
+}
+
+/* plus sign */
+.sign {
+    width: 100%;
+    font-size: 2.2em;
+    color: white;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+/* text */
+.text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.4em;
+    font-weight: 500;
+    transition-duration: .3s;
+}
+/* hover effect on button width */
+.Btn:hover {
+    width: 30%;
+    transition-duration: .3s;
+}
+
+.Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 15px;
+}
+/* hover effect button's text */
+.Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 15px;
+}
+/* button click effect*/
+.Btn:active {
+    transform: translate(2px ,2px);
+}
+
+.flash-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #fff;
+    z-index: 1000;
+    animation: fade-in-out 3s ease-in-out;
+}
+
+.flash-notification.success {
+    background-color: #4caf50; /* Green for success */
+}
+
+.flash-notification.error {
+    background-color: #f44336; /* Red for error */
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    10%, 90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Left form container */
+.form-container {
+    flex: 1; /* Allow the form to take up proportional space */
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 40%;
+}
+
+#dispatch-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 14px;
+    border-radius: 8px;
+    overflow: hidden; /* Ensures rounded corners for the table */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#dispatch-history-table thead {
+    background-color: #4C4CB2;
+    color: #fff;
+    text-align: left;
+}
+
+#dispatch-history-table th,
+#dispatch-history-table td {
+    padding: 12px 15px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+#dispatch-history-table tbody tr {
+    transition: background-color 0.3s;
+}
+
+#dispatch-history-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Light gray for alternate rows */
+}
+
+#dispatch-history-table tbody tr:hover {
+    background-color: #f1f1f1; /* Slightly darker gray on hover */
+}
+
+#dispatch-history-table td {
+    color: #333; /* Ensure good contrast for readability */
+    word-wrap: break-word;
+    font-size: 12px;
+}
+
+#dispatch-history-table .success {
+    color: #28a745; /* Green for success */
+    font-weight: bold;
+}
+
+#dispatch-history-table .failure {
+    color: #dc3545; /* Red for failure */
+    font-weight: bold;
+}
+
+/* JSON container styling */
+#dispatch-history-table td .json-container {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 12px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    overflow-x: auto; /* Horizontal scroll for long JSON content */
+    white-space: pre-wrap; /* Preserve formatting with line breaks */
+    word-wrap: break-word; /* Break long words */
+    color: #333;
+    max-width: 200px;
+    display: block;
+
+}
+
+#dispatch-history-table td .json-container span.key {
+    color: #c0392b; /* Red for keys */
+    font-weight: bold;
+}
+
+#dispatch-history-table td .json-container span.value {
+    color: #2980b9; /* Blue for string values */
+}
+
+#dispatch-history-table td .json-container span.boolean {
+    color: #27ae60; /* Green for boolean values */
+}
+
+#dispatch-history-table td .json-container span.null {
+    color: #95a5a6; /* Gray for null */
+}
+
+
+@media (max-width: 768px) {
+    #dispatch-history-table th,
+    #dispatch-history-table td {
+        padding: 10px; /* Reduce padding for smaller screens */
+    }
+
+    #dispatch-history-table th {
+        font-size: 13px;
+    }
+
+    #dispatch-history-table td {
+        font-size: 12px;
+    }
+}
+
+
+/* Make the form rows stack vertically on smaller screens */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column; /* Stack inputs vertically */
+        gap: 10px; /* Reduce gap for smaller screens */
+    }
+
+    .input-group {
+        width: 100%; /* Ensure inputs take full width */
+    }
+
+    button {
+        width: 100%; /* Make buttons full width */
+        padding: 12px; /* Adjust padding for better touch targets */
+    }
+
+    #payload-container {
+        gap: 10px; /* Add spacing between payload fields */
+        flex-wrap: wrap; /* Wrap payload fields */
+    }
+
+    .payload-field {
+        flex-direction: column; /* Stack payload fields */
+        gap: 10px;
+    }
+}
+
+
+/* Responsive table design */
+@media (max-width: 600px) {
+    #dispatch-history-table th,
+    #dispatch-history-table td {
+        font-size: 12px;
+    }
+
+    #dispatch-history-table td {
+        max-width: 120px; /* Adjust column width for smaller screens */
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+.loading-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    height: 96px;
+    width: 96px;
+    animation: rotate_3922 1.2s linear infinite;
+    background-color: #9b59b6;
+    background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+}
+
+.loading-container span {
+    position: absolute;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    background-color: #9b59b6;
+    background-image: linear-gradient(#9b59b6, #84cdfa, #5ad1cd);
+}
+
+.loading-container span:nth-of-type(1) {
+    filter: blur(5px);
+}
+
+.loading-container span:nth-of-type(2) {
+    filter: blur(10px);
+}
+
+.loading-container span:nth-of-type(3) {
+    filter: blur(25px);
+}
+
+.loading-container span:nth-of-type(4) {
+    filter: blur(50px);
+}
+
+.loading-container::after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    background-color: #fff;
+    border: solid 5px #ffffff;
+    border-radius: 50%;
+}
+
+@keyframes rotate_3922 {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#dispatch-history-container {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 100vh; /* Limit the height to the viewport */
+    /*overflow-y: auto; !* Enable vertical scrolling *!*/
+}
+
+/* Global Scrollbar Styling for the Whole Page */
+
+/* Webkit Scrollbar Styling (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 8px; /* Slimmer width */
+    height: 8px; /* Slimmer height for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9494D1; /* Color of the scrollbar handle */
+    border-radius: 10px; /* Rounded edges */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #4C4CB2; /* Darker on hover */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Background of the scrollbar track */
+    border-radius: 10px; /* Rounded edges for track */
 }
