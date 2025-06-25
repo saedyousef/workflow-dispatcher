@@ -9,6 +9,7 @@ const addPayloadFieldButton = document.getElementById("add-payload-field") as HT
 const savePatCheckbox = document.getElementById("save-pat") as HTMLInputElement;
 const logHistoryCheckbox = document.getElementById("log-history") as HTMLInputElement;
 const loader = document.querySelector(".loading-container") as HTMLDivElement;
+const themeSwitch = document.getElementById("theme-switch") as (HTMLInputElement | null);
 
 // Load saved PAT if available
 const savedPat = loadFromLocalStorage<string>("github_pat");
@@ -121,5 +122,15 @@ form.addEventListener("submit", async (event) => {
 
 // Load initial dispatch history
 window.addEventListener("DOMContentLoaded", () => {
-    displayDispatchHistory(loadFromLocalStorage<DispatchHistoryEntry[]>("dispatch_history") || []);
+    displayDispatchHistory(
+        loadFromLocalStorage<DispatchHistoryEntry[]>("dispatch_history") || []
+    );
+
+    const savedTheme = loadFromLocalStorage<string>("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+        if (themeSwitch) {
+            themeSwitch.checked = true;
+        }
+    }
 });
