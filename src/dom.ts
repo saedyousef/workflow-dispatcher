@@ -53,7 +53,7 @@ export function displayDispatchHistory(history: DispatchHistory): void {
     if (history.length === 0) {
         const noDataRow = document.createElement("tr");
         const noDataCell = document.createElement("td");
-        noDataCell.colSpan = 9;
+        noDataCell.colSpan = 6;
         noDataCell.textContent = "No dispatch history available.";
         noDataRow.appendChild(noDataCell);
         historyTableBody.appendChild(noDataRow);
@@ -76,34 +76,10 @@ export function displayDispatchHistory(history: DispatchHistory): void {
         const workflowCell = document.createElement("td");
         workflowCell.textContent = entry.workflow;
 
-        // Ref cell
-        const refCell = document.createElement("td");
-        refCell.textContent = entry.ref;
-
         // Status cell
         const statusCell = document.createElement("td");
         statusCell.textContent = entry.status;
         statusCell.style.color = entry.status === "success" ? "green" : "red";
-
-        // Payload cell with styled JSON
-        const payloadCell = document.createElement("td");
-        if (entry.payload && Object.keys(entry.payload).length > 0) {
-            const jsonContainer = document.createElement("div");
-            jsonContainer.className = "json-container";
-
-            const formattedPayload = Object.entries(entry.payload)
-                .map(([key, value]) => `<span class="key">"${key}"</span>: <span class="value">"${value}"</span>`)
-                .join(",<br>");
-
-            jsonContainer.innerHTML = `{<br>${formattedPayload}<br>}`;
-            payloadCell.appendChild(jsonContainer);
-        } else {
-            payloadCell.textContent = "{}";
-        }
-
-        // Error message cell
-        const errorCell = document.createElement("td");
-        errorCell.textContent = entry.errorMessage || "N/A";
 
         // Timestamp cell
         const timestampCell = document.createElement("td");
@@ -120,10 +96,7 @@ export function displayDispatchHistory(history: DispatchHistory): void {
         row.appendChild(ownerCell);
         row.appendChild(repoCell);
         row.appendChild(workflowCell);
-        row.appendChild(refCell);
         row.appendChild(statusCell);
-        row.appendChild(payloadCell);
-        row.appendChild(errorCell);
         row.appendChild(timestampCell);
         row.appendChild(detailsCell);
 
