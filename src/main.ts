@@ -9,6 +9,23 @@ const addPayloadFieldButton = document.getElementById("add-payload-field") as HT
 const savePatCheckbox = document.getElementById("save-pat") as HTMLInputElement;
 const logHistoryCheckbox = document.getElementById("log-history") as HTMLInputElement;
 const loader = document.querySelector(".loading-container") as HTMLDivElement;
+const themeSwitch = document.getElementById("theme-switch") as HTMLInputElement;
+
+const savedTheme = loadFromLocalStorage<string>("theme");
+if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+    themeSwitch.checked = true;
+}
+
+themeSwitch.addEventListener("change", () => {
+    if (themeSwitch.checked) {
+        document.body.classList.add("dark");
+        saveToLocalStorage("theme", "dark");
+    } else {
+        document.body.classList.remove("dark");
+        saveToLocalStorage("theme", "light");
+    }
+});
 
 // Load saved PAT if available
 const savedPat = loadFromLocalStorage<string>("github_pat");
