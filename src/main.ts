@@ -138,5 +138,15 @@ form.addEventListener("submit", async (event) => {
 
 // Load initial dispatch history
 window.addEventListener("DOMContentLoaded", () => {
-    displayDispatchHistory(loadFromLocalStorage<DispatchHistoryEntry[]>("dispatch_history") || []);
+    displayDispatchHistory(
+        loadFromLocalStorage<DispatchHistoryEntry[]>("dispatch_history") || []
+    );
+
+    const savedTheme = loadFromLocalStorage<string>("theme");
+    if (savedTheme === "dark") {
+        document.body.classList.add("dark");
+        if (themeSwitch) {
+            themeSwitch.checked = true;
+        }
+    }
 });
