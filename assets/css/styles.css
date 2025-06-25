@@ -1,3 +1,25 @@
+:root {
+    --bg: #f4f4f4;
+    --text: #333;
+    --container-bg: #fff;
+    --header-bg: #4C4CB2;
+    --row-alt-bg: #f9f9f9;
+    --row-hover-bg: #f1f1f1;
+    --input-bg: #fff;
+    --input-border: #ccc;
+}
+
+body.dark {
+    --bg: #1e1e1e;
+    --text: #f4f4f4;
+    --container-bg: #2e2e2e;
+    --header-bg: #3b3b73;
+    --row-alt-bg: #2a2a2a;
+    --row-hover-bg: #3a3a3a;
+    --input-bg: #3a3a3a;
+    --input-border: #555;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -6,7 +28,8 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f4f4f4;
+    background-color: var(--bg);
+    color: var(--text);
 }
 
 
@@ -23,8 +46,10 @@ label {
 input, textarea, button {
     margin-bottom: 10px;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--input-border);
     border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text);
 }
 
 /* From Uiverse.io by milegelu */
@@ -129,6 +154,45 @@ input[type="checkbox"]:checked + label {
     transition-duration: 0.2s;
 }
 
+/* Theme toggle */
+.ui-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+}
+.ui-switch input {
+    display: none;
+}
+.ui-switch span {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--input-border);
+    transition: 0.3s;
+    border-radius: 26px;
+}
+.ui-switch span::before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 2px;
+    bottom: 2px;
+    background-color: var(--input-bg);
+    transition: 0.3s;
+    border-radius: 50%;
+}
+.ui-switch input:checked + span {
+    background-color: #4C4CB2;
+}
+.ui-switch input:checked + span::before {
+    transform: translateX(24px);
+}
+
 /* Wider container */
 .container {
     margin-top: 70px;
@@ -138,7 +202,7 @@ input[type="checkbox"]:checked + label {
     flex-direction: row; /* Align form and table horizontally */
     gap: 30px; /* Space between form and table */
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--container-bg);
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     max-height: 100vh; /* Limit the height to the viewport */
@@ -171,8 +235,10 @@ input[type="password"],
 button {
     padding: 10px;
     font-size: 16px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--input-border);
     border-radius: 4px;
+    background-color: var(--input-bg);
+    color: var(--text);
 }
 
 /* Align toggle elements */
@@ -194,14 +260,20 @@ button {
 
 
 .remove-payload-field {
+    --back-color: 240, 40%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 10%;
-    border: 0 solid transparent;
-    background-color: rgba(100,77,237,0.08);
-    border-radius: 1.25em;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: calc(45px/2);
+    cursor: pointer;
+    background: linear-gradient(
+            140deg,
+            hsla(var(--back-color), 50%, 1) min(2em, 20%),
+            hsla(var(--back-color), 50%, 0.6) min(8em, 100%)
+    );
     transition: all 0.2s linear;
 }
 
@@ -277,6 +349,12 @@ button {
     .remove-payload-field {
         margin-top: 10px; /* Add spacing below inputs */
         flex: 0 0 auto; /* Keep the button size fixed */
+    }
+
+    .Btn,
+    .remove-payload-field {
+        min-width: 40px;
+        min-height: 40px;
     }
 }
 
@@ -405,8 +483,8 @@ button {
 }
 
 #dispatch-history-table thead {
-    background-color: #4C4CB2;
-    color: #fff;
+    background-color: var(--header-bg);
+    color: var(--text);
     text-align: left;
 }
 
@@ -422,15 +500,15 @@ button {
 }
 
 #dispatch-history-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Light gray for alternate rows */
+    background-color: var(--row-alt-bg); /* Light gray for alternate rows */
 }
 
 #dispatch-history-table tbody tr:hover {
-    background-color: #f1f1f1; /* Slightly darker gray on hover */
+    background-color: var(--row-hover-bg); /* Slightly darker gray on hover */
 }
 
 #dispatch-history-table td {
-    color: #333; /* Ensure good contrast for readability */
+    color: var(--text); /* Ensure good contrast for readability */
     word-wrap: break-word;
     font-size: 12px;
 }
@@ -449,14 +527,14 @@ button {
 #dispatch-history-table td .json-container {
     font-family: 'Courier New', Courier, monospace;
     font-size: 12px;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
+    background-color: var(--row-alt-bg);
+    border: 1px solid var(--input-border);
     border-radius: 5px;
     padding: 10px;
     overflow-x: auto; /* Horizontal scroll for long JSON content */
     white-space: pre-wrap; /* Preserve formatting with line breaks */
     word-wrap: break-word; /* Break long words */
-    color: #333;
+    color: var(--text);
     max-width: 200px;
     display: block;
 
@@ -523,6 +601,18 @@ button {
     }
 }
 
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form-container,
+    #dispatch-history-container,
+    form,
+    #dispatch-history-table {
+        width: 100%;
+    }
+}
 
 /* Responsive table design */
 @media (max-width: 600px) {

@@ -3,7 +3,6 @@
 node_modules/
 
 # Ignore compiled TypeScript files (optional if you don't want to include them)
-dist/
 
 # Ignore temporary files
 *.log
