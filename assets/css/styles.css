@@ -589,6 +589,18 @@ button {
     }
 }
 
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form-container,
+    #dispatch-history-container,
+    form,
+    #dispatch-history-table {
+        width: 100%;
+    }
+}
 
 /* Responsive table design */
 @media (max-width: 600px) {
