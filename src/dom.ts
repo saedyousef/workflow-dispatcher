@@ -6,7 +6,43 @@
  * DOM Manipulation Functions
  */
 
-import { DispatchHistory } from './types.js';
+import { DispatchHistory, DispatchHistoryEntry } from './types.js';
+
+declare const MicroModal: any;
+
+export function showDispatchDetails(entry: DispatchHistoryEntry): void {
+    const container = document.getElementById("dispatch-details-content") as HTMLElement;
+    if (!container) return;
+    container.innerHTML = `
+        <p><strong>Repository:</strong> ${entry.owner}/${entry.repo}</p>
+        <p><strong>Workflow:</strong> ${entry.workflow}</p>
+        <p><strong>Branch:</strong> ${entry.ref}</p>
+        <p><strong>Status:</strong> ${entry.status}</p>
+        <p><strong>Timestamp:</strong> ${new Date(entry.timestamp).toLocaleString()}</p>
+        ${entry.errorMessage ? `<p><strong>Error:</strong> ${entry.errorMessage}</p>` : ""}
+    `;
+
+    if (entry.payload && Object.keys(entry.payload).length > 0) {
+        const table = document.createElement("table");
+        table.className = "payload-table";
+        table.innerHTML = "<tr><th>Key</th><th>Value</th></tr>";
+        Object.entries(entry.payload).forEach(([key, value]) => {
+            const row = document.createElement("tr");
+            const k = document.createElement("td");
+            k.textContent = key;
+            const v = document.createElement("td");
+            v.textContent = typeof value === 'object' ? JSON.stringify(value) : String(value);
+            row.appendChild(k);
+            row.appendChild(v);
+            table.appendChild(row);
+        });
+        container.appendChild(table);
+    }
+
+    if (typeof MicroModal !== "undefined") {
+        MicroModal.show("dispatch-details-modal");
+    }
+}
 
 export function displayDispatchHistory(history: DispatchHistory): void {
     const historyTableBody = document.querySelector("#dispatch-history-table tbody") as HTMLTableSectionElement;
@@ -17,7 +53,7 @@ export function displayDispatchHistory(history: DispatchHistory): void {
     if (history.length === 0) {
         const noDataRow = document.createElement("tr");
         const noDataCell = document.createElement("td");
-        noDataCell.colSpan = 8;
+        noDataCell.colSpan = 9;
         noDataCell.textContent = "No dispatch history available.";
         noDataRow.appendChild(noDataCell);
         historyTableBody.appendChild(noDataRow);
@@ -73,6 +109,13 @@ export function displayDispatchHistory(history: DispatchHistory): void {
         const timestampCell = document.createElement("td");
         timestampCell.textContent = new Date(entry.timestamp).toLocaleString();
 
+        const detailsCell = document.createElement("td");
+        const detailsButton = document.createElement("button");
+        detailsButton.textContent = "View Details";
+        detailsButton.className = "btn-action";
+        detailsButton.addEventListener("click", () => showDispatchDetails(entry));
+        detailsCell.appendChild(detailsButton);
+
         // Append all cells to the row
         row.appendChild(ownerCell);
         row.appendChild(repoCell);
@@ -82,6 +125,7 @@ export function displayDispatchHistory(history: DispatchHistory): void {
         row.appendChild(payloadCell);
         row.appendChild(errorCell);
         row.appendChild(timestampCell);
+        row.appendChild(detailsCell);
 
         // Append the row to the table body
         historyTableBody.appendChild(row);

@@ -63,14 +63,8 @@
                     <span>Log workflow dispatch <small>(in local storage)</small></span>
                 </div>
             </div>
-            <div class="form-row">
-
-                <button class="Btn cssbuttons-io-button" id="add-payload-field" type="button">
-
-                    <div class="sign">+</div>
-
-                    <div class="text">Add Payload</div>
-                </button>
+            <div class="form-row action-buttons">
+                <button class="btn-action" id="add-payload-field" type="button">Add Payload</button>
             </div>
             <div id="payload-container" class="form-row">
 
@@ -105,12 +99,28 @@
                 <th>Payload</th>
                 <th>Error Message</th>
                 <th>Timestamp</th>
+                <th>Details</th>
             </tr>
             </thead>
             <tbody>
             <!-- Rows will be dynamically added here -->
             </tbody>
         </table>
+    </div>
+</div>
+
+<div class="modal micromodal-slide" id="dispatch-details-modal" aria-hidden="true">
+    <div class="modal__overlay" tabindex="-1" data-micromodal-close>
+        <div class="modal__container" role="dialog" aria-modal="true" aria-labelledby="dispatch-details-title">
+            <header class="modal__header">
+                <h2 class="modal__title" id="dispatch-details-title">Dispatch Details</h2>
+                <button class="modal__close" aria-label="Close modal" data-micromodal-close>&times;</button>
+            </header>
+            <main class="modal__content" id="dispatch-details-content"></main>
+            <footer class="modal__footer">
+                <button class="button" data-micromodal-close aria-label="Close this dialog window">Close</button>
+            </footer>
+        </div>
     </div>
 </div>
 
@@ -121,6 +131,14 @@
     <span></span>
 </div>
 
+<script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 <script src="dist/main.js" type="module"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (typeof MicroModal !== 'undefined') {
+            MicroModal.init();
+        }
+    });
+</script>
 </body>
 </html>
