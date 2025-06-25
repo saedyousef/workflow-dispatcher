@@ -9,7 +9,23 @@ const addPayloadFieldButton = document.getElementById("add-payload-field") as HT
 const savePatCheckbox = document.getElementById("save-pat") as HTMLInputElement;
 const logHistoryCheckbox = document.getElementById("log-history") as HTMLInputElement;
 const loader = document.querySelector(".loading-container") as HTMLDivElement;
-const themeSwitch = document.getElementById("theme-switch") as (HTMLInputElement | null);
+const themeSwitch = document.getElementById("theme-switch") as HTMLInputElement;
+
+const savedTheme = loadFromLocalStorage<string>("theme");
+if (savedTheme === "dark") {
+    document.body.classList.add("dark");
+    themeSwitch.checked = true;
+}
+
+themeSwitch.addEventListener("change", () => {
+    if (themeSwitch.checked) {
+        document.body.classList.add("dark");
+        saveToLocalStorage("theme", "dark");
+    } else {
+        document.body.classList.remove("dark");
+        saveToLocalStorage("theme", "light");
+    }
+});
 
 // Load saved PAT if available
 const savedPat = loadFromLocalStorage<string>("github_pat");
@@ -44,17 +60,17 @@ addPayloadFieldButton.addEventListener("click", () => {
     svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
     svg.setAttribute("fill", "none");
     svg.setAttribute("viewBox", "0 0 20 20");
-    svg.setAttribute("height", "25");
-    svg.setAttribute("width", "25");
+    svg.setAttribute("height", "20");
+    svg.setAttribute("width", "20");
 
     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    path.setAttribute("fill", "#6361D9");
+    path.setAttribute("fill", "#0F172A");
+    path.setAttribute("fill-rule", "evenodd");
+    path.setAttribute("clip-rule", "evenodd");
     path.setAttribute(
         "d",
-        "M8.78842 5.03866C8.86656 4.96052 8.97254 4.91663 9.08305 4.91663H11.4164C11.5269 4.91663 11.6329 4.96052 11.711 5.03866C11.7892 5.11681 11.833 5.22279 11.833 5.33329V5.74939H8.66638V5.33329C8.66638 5.22279 8.71028 5.11681 8.78842 5.03866ZM7.16638 5.74939V5.33329C7.16638 4.82496 7.36832 4.33745 7.72776 3.978C8.08721 3.61856 8.57472 3.41663 9.08305 3.41663H11.4164C11.9247 3.41663 12.4122 3.61856 12.7717 3.978C13.1311 4.33745 13.333 4.82496 13.333 5.33329V5.74939H15.5C15.9142 5.74939 16.25 6.08518 16.25 6.49939C16.25 6.9136 15.9142 7.24939 15.5 7.24939H15.0105L14.2492 14.7095C14.2382 15.2023 14.0377 15.6726 13.6883 16.0219C13.3289 16.3814 12.8414 16.5833 12.333 16.5833H8.16638C7.65805 16.5833 7.17054 16.3814 6.81109 16.0219C6.46176 15.6726 6.2612 15.2023 6.25019 14.7095L5.48896 7.24939H5C4.58579 7.24939 4.25 6.9136 4.25 6.49939C4.25 6.08518 4.58579 5.74939 5 5.74939H6.16667H7.16638ZM7.91638 7.24996H12.583H13.5026L12.7536 14.5905C12.751 14.6158 12.7497 14.6412 12.7497 14.6666C12.7497 14.7771 12.7058 14.8831 12.6277 14.9613C12.5495 15.0394 12.4436 15.0833 12.333 15.0833H8.16638C8.05588 15.0833 7.94989 15.0394 7.87175 14.9613C7.79361 14.8831 7.74972 14.7771 7.74972 14.6666C7.74972 14.6412 7.74842 14.6158 7.74584 14.5905L6.99681 7.24996H7.91638Z"
+        "M8.75 1C7.23122 1 6 2.23122 6 3.75V4.1927C5.20472 4.26972 4.41602 4.36947 3.63458 4.49129C3.22531 4.5551 2.94525 4.9386 3.00906 5.34787C3.07286 5.75714 3.45637 6.0372 3.86564 5.97339L4.01355 5.95062L4.85504 16.4693C4.96938 17.8985 6.16254 19 7.59629 19H12.4035C13.8372 19 15.0304 17.8985 15.1447 16.4693L15.9862 5.95055L16.1346 5.97339C16.5438 6.0372 16.9274 5.75714 16.9912 5.34787C17.055 4.9386 16.7749 4.5551 16.3656 4.49129C15.5841 4.36946 14.7954 4.2697 14 4.19268V3.75C14 2.23122 12.7688 1 11.25 1H8.75ZM10.0001 4C10.8395 4 11.673 4.02523 12.5 4.07499V3.75C12.5 3.05964 11.9404 2.5 11.25 2.5H8.75C8.05964 2.5 7.5 3.05964 7.5 3.75V4.075C8.32707 4.02524 9.16068 4 10.0001 4ZM8.57948 7.72002C8.56292 7.30614 8.21398 6.98404 7.8001 7.0006C7.38622 7.01716 7.06412 7.36609 7.08068 7.77998L7.38069 15.28C7.39725 15.6939 7.74619 16.016 8.16007 15.9994C8.57395 15.9828 8.89605 15.6339 8.87949 15.22L8.57948 7.72002ZM12.9195 7.77998C12.936 7.36609 12.614 7.01715 12.2001 7.0006C11.7862 6.98404 11.4372 7.30614 11.4207 7.72002L11.1207 15.22C11.1041 15.6339 11.4262 15.9828 11.8401 15.9994C12.254 16.016 12.6029 15.6939 12.6195 15.28L12.9195 7.77998Z"
     );
-    path.setAttribute("clip-rule", "evenodd");
-    path.setAttribute("fill-rule", "evenodd");
 
     svg.appendChild(path);
 
