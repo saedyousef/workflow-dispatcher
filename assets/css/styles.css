@@ -840,25 +840,29 @@ button:disabled {
 .modal__container {
     background-color: var(--container-bg);
     color: var(--text);
-    padding: 20px;
+    padding: 30px;
+    border: 1px solid var(--input-border);
     border-radius: 8px;
-    max-width: 500px;
+    max-width: 600px;
     width: 90%;
     max-height: 80vh;
     overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .modal__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--input-border);
 }
 
 .modal__title {
     margin: 0;
-    font-size: 1.2em;
+    font-size: 1.4em;
+    font-weight: 600;
 }
 
 .modal__close {
@@ -867,6 +871,18 @@ button:disabled {
     font-size: 1.5em;
     cursor: pointer;
     color: var(--text);
+}
+
+.modal__footer {
+    border-top: 1px solid var(--input-border);
+    padding-top: 10px;
+    margin-top: 15px;
+    text-align: right;
+}
+
+.modal__footer .button {
+    font-size: 16px;
+    padding: 0.6em 1.2em;
 }
 
 .payload-table {
