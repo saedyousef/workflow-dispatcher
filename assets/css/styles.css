@@ -194,14 +194,20 @@ button {
 
 
 .remove-payload-field {
+    --back-color: 240, 40%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 10%;
-    border: 0 solid transparent;
-    background-color: rgba(100,77,237,0.08);
-    border-radius: 1.25em;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: calc(45px/2);
+    cursor: pointer;
+    background: linear-gradient(
+            140deg,
+            hsla(var(--back-color), 50%, 1) min(2em, 20%),
+            hsla(var(--back-color), 50%, 0.6) min(8em, 100%)
+    );
     transition: all 0.2s linear;
 }
 
@@ -277,6 +283,12 @@ button {
     .remove-payload-field {
         margin-top: 10px; /* Add spacing below inputs */
         flex: 0 0 auto; /* Keep the button size fixed */
+    }
+
+    .Btn,
+    .remove-payload-field {
+        min-width: 40px;
+        min-height: 40px;
     }
 }
 
