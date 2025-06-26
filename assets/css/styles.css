@@ -238,6 +238,9 @@ button {
     align-items: center;
     gap: 10px;
 }
+.theme-toggle label {
+    margin: 0;
+}
 
 /* Ensure toggle rows remain horizontal on small screens */
 .form-row.theme-toggle,
@@ -476,6 +479,7 @@ button {
 #dispatch-history-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
     margin-top: 20px;
     font-size: 14px;
     border-radius: 8px;
@@ -732,6 +736,7 @@ button:disabled {
 #dispatch-history-table-wrapper {
     max-height: 540px;
     overflow-y: auto;
+    overflow-x: auto;
 }
 
 #dispatch-history-table-wrapper::-webkit-scrollbar {

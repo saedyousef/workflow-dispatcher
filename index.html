@@ -20,7 +20,7 @@
 </head>
 <body>
 <div class="theme-toggle-wrapper">
-    <a class="github-star-badge" href="https://github.com/saedyousef/workflow-dispatcher" target="_blank" aria-label="Star saedyousef/workflow-dispatcher on GitHub">
+    <a class="github-star-badge" href="https://github.com/saedyousef/workflow-dispatcher" target="_blank" rel="noopener noreferrer" aria-label="Star saedyousef/workflow-dispatcher on GitHub">
         <img src="https://img.shields.io/github/stars/saedyousef/workflow-dispatcher?style=social" alt="GitHub stars">
     </a>
     <label class="ui-switch">
@@ -65,14 +65,14 @@
                 <div class="theme-toggle in">
                     <input type="checkbox" id="save-pat">
                     <label class="toggleSwitch" for="save-pat"></label>
-                    <span>Save PAT <small>(For future use)</small></span>
+                    <label for="save-pat" class="toggle-label">Save PAT <small>(For future use)</small></label>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-row theme-toggle">
                     <input type="checkbox" id="log-history">
                     <label class="toggleSwitch" for="log-history"></label>
-                    <span>Log workflow dispatch <small>(in local storage)</small></span>
+                    <label for="log-history" class="toggle-label">Log workflow dispatch <small>(in local storage)</small></label>
                 </div>
             </div>
             <div class="form-row action-buttons">
