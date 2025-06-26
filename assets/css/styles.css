@@ -239,12 +239,24 @@ button {
     gap: 10px;
 }
 
+/* Ensure toggle rows remain horizontal on small screens */
+.form-row.theme-toggle,
+.form-row .theme-toggle {
+    flex-direction: row;
+    align-items: center;
+}
+
 /* Dynamic payload container */
 #payload-container {
+    display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    width: 100%;
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
+    margin-bottom: 15px;
 }
 
 #add-payload-field {
@@ -588,9 +600,16 @@ button {
 
     #payload-container {
         gap: 10px; /* Add spacing between payload fields */
-        flex-wrap: wrap; /* Wrap payload fields */
+        flex-direction: column;
+        flex-wrap: nowrap;
         max-height: 300px;
         overflow-y: auto;
+    }
+
+    .form-row.theme-toggle,
+    .form-row .theme-toggle {
+        flex-direction: row;
+        align-items: center;
     }
 
     .payload-field {
