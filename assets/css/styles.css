@@ -27,11 +27,11 @@ body.dark {
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding: 0;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    align-items: flex-start;
+    min-height: 100vh;
     background-color: var(--bg);
     color: var(--text);
 }
@@ -251,29 +251,24 @@ button {
 
 
 .remove-payload-field {
-    --back-color: 240, 40%;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    padding: 0;
+    border: none;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 45px;
-    height: 45px;
-    border: none;
-    border-radius: calc(45px/2);
+    background-color: #dc3545;
+    color: #fff;
     cursor: pointer;
-    background: linear-gradient(
-            140deg,
-            hsla(var(--back-color), 50%, 1) min(2em, 20%),
-            hsla(var(--back-color), 50%, 0.6) min(8em, 100%)
-    );
-    transition: all 0.2s linear;
+    transition: background-color 0.2s;
 }
 
 .remove-payload-field:hover {
-    box-shadow: 3.4px 2.5px 4.9px rgba(0, 0, 0, 0.025),
-    8.6px 6.3px 12.4px rgba(0, 0, 0, 0.035),
-    17.5px 12.8px 25.3px rgba(0, 0, 0, 0.045),
-    36.1px 26.3px 52.2px rgba(0, 0, 0, 0.055),
-    99px 72px 143px rgba(0, 0, 0, 0.08);
+    background-color: #c82333;
 }
 
 .tooltip {
@@ -344,8 +339,8 @@ button {
 
     .Btn,
     .remove-payload-field {
-        min-width: 40px;
-        min-height: 40px;
+        min-width: 32px;
+        min-height: 32px;
     }
 }
 
