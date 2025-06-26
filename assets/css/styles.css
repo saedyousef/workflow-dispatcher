@@ -473,7 +473,7 @@ button {
 
 #dispatch-history-table thead {
     background-color: var(--header-bg);
-    color: var(--text);
+    color: #fff;
     text-align: left;
 }
 
