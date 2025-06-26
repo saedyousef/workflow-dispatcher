@@ -1,6 +1,6 @@
 import {DispatchHistoryEntry, Status, WorkflowPayload} from "./types.js";
 import {loadFromLocalStorage, saveToLocalStorage, toggleLoader} from "./utils.js";
-import {dispatchWorkflow, saveDispatchHistory} from "./workflow.js";
+import {dispatchWorkflow, saveDispatchHistory, clearDispatchHistory} from "./workflow.js";
 import {displayDispatchHistory} from "./dom.js";
 
 declare const MicroModal: any;
@@ -12,6 +12,7 @@ const savePatCheckbox = document.getElementById("save-pat") as HTMLInputElement;
 const logHistoryCheckbox = document.getElementById("log-history") as HTMLInputElement;
 const loader = document.querySelector(".loading-container") as HTMLDivElement;
 const themeSwitch = document.getElementById("theme-switch") as HTMLInputElement;
+const clearHistoryButton = document.getElementById("clear-history") as HTMLButtonElement;
 
 const savedTheme = loadFromLocalStorage<string>("theme");
 if (savedTheme === "dark") {
@@ -129,3 +130,10 @@ window.addEventListener("DOMContentLoaded", () => {
         MicroModal.init();
     }
 });
+
+if (clearHistoryButton) {
+    clearHistoryButton.addEventListener("click", () => {
+        clearDispatchHistory();
+        displayDispatchHistory([]);
+    });
+}
