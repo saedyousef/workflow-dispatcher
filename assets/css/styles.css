@@ -699,6 +699,17 @@ button:disabled {
     gap: 20px;
 }
 
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#clear-history.small {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
 #dispatch-history-table-wrapper {
     max-height: 540px;
     overflow-y: auto;
@@ -907,5 +918,27 @@ button:disabled {
     padding: 8px;
     text-align: left;
     word-break: break-word;
+}
+
+.details-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.details-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--input-border);
+}
+
+.details-list li:last-child {
+    border-bottom: none;
+}
+
+.details-label {
+    font-weight: 500;
+    color: #666;
 }
 
