@@ -5,6 +5,28 @@
 /**
  * DOM Manipulation Functions
  */
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21)
+        return 'th';
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}
+export function formatTimestamp(iso) {
+    const date = new Date(iso);
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'long' });
+    const year = date.getFullYear();
+    const time = date.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+    });
+    return `${day}${getOrdinalSuffix(day)} ${month} ${year} ${time}`;
+}
 export function showDispatchDetails(entry) {
     const container = document.getElementById("dispatch-details-content");
     if (!container)
@@ -14,7 +36,7 @@ export function showDispatchDetails(entry) {
         <p><strong>Workflow:</strong> ${entry.workflow}</p>
         <p><strong>Branch:</strong> ${entry.ref}</p>
         <p><strong>Status:</strong> ${entry.status}</p>
-        <p><strong>Timestamp:</strong> ${new Date(entry.timestamp).toLocaleString()}</p>
+        <p><strong>Timestamp:</strong> ${formatTimestamp(entry.timestamp)}</p>
         ${entry.errorMessage ? `<p><strong>Error:</strong> ${entry.errorMessage}</p>` : ""}
     `;
     if (entry.payload && Object.keys(entry.payload).length > 0) {
@@ -50,8 +72,10 @@ export function displayDispatchHistory(history) {
         historyTableBody.appendChild(noDataRow);
         return;
     }
+    // Sort by timestamp descending
+    const sorted = [...history].sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
     // Populate table rows
-    history.forEach((entry) => {
+    sorted.forEach((entry) => {
         const row = document.createElement("tr");
         // Owner cell
         const ownerCell = document.createElement("td");
@@ -68,7 +92,7 @@ export function displayDispatchHistory(history) {
         statusCell.style.color = entry.status === "success" ? "green" : "red";
         // Timestamp cell
         const timestampCell = document.createElement("td");
-        timestampCell.textContent = new Date(entry.timestamp).toLocaleString();
+        timestampCell.textContent = formatTimestamp(entry.timestamp);
         const detailsCell = document.createElement("td");
         const detailsButton = document.createElement("button");
         detailsButton.textContent = "View Details";
