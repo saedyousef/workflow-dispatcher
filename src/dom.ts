@@ -10,6 +10,29 @@ import { DispatchHistory, DispatchHistoryEntry } from './types.js';
 
 declare const MicroModal: any;
 
+function getOrdinalSuffix(day: number): string {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}
+
+export function formatTimestamp(iso: string): string {
+    const date = new Date(iso);
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'long' });
+    const year = date.getFullYear();
+    const time = date.toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+    });
+    return `${day}${getOrdinalSuffix(day)} ${month} ${year} ${time}`;
+}
+
 export function showDispatchDetails(entry: DispatchHistoryEntry): void {
     const container = document.getElementById("dispatch-details-content") as HTMLElement;
     if (!container) return;
@@ -18,7 +41,7 @@ export function showDispatchDetails(entry: DispatchHistoryEntry): void {
         <p><strong>Workflow:</strong> ${entry.workflow}</p>
         <p><strong>Branch:</strong> ${entry.ref}</p>
         <p><strong>Status:</strong> ${entry.status}</p>
-        <p><strong>Timestamp:</strong> ${new Date(entry.timestamp).toLocaleString()}</p>
+        <p><strong>Timestamp:</strong> ${formatTimestamp(entry.timestamp)}</p>
         ${entry.errorMessage ? `<p><strong>Error:</strong> ${entry.errorMessage}</p>` : ""}
     `;
 
@@ -60,8 +83,13 @@ export function displayDispatchHistory(history: DispatchHistory): void {
         return;
     }
 
+    // Sort by timestamp descending
+    const sorted = [...history].sort((a, b) =>
+        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    );
+
     // Populate table rows
-    history.forEach((entry) => {
+    sorted.forEach((entry) => {
         const row = document.createElement("tr");
 
         // Owner cell
@@ -83,7 +111,7 @@ export function displayDispatchHistory(history: DispatchHistory): void {
 
         // Timestamp cell
         const timestampCell = document.createElement("td");
-        timestampCell.textContent = new Date(entry.timestamp).toLocaleString();
+        timestampCell.textContent = formatTimestamp(entry.timestamp);
 
         const detailsCell = document.createElement("td");
         const detailsButton = document.createElement("button");

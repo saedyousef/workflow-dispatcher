@@ -476,6 +476,13 @@ button {
     text-align: left;
 }
 
+#dispatch-history-table thead th {
+    position: sticky;
+    top: 0;
+    background-color: var(--header-bg);
+    z-index: 1;
+}
+
 #dispatch-history-table th,
 #dispatch-history-table td {
     padding: 12px 15px;
