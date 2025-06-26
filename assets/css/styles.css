@@ -834,6 +834,13 @@ button:disabled {
   top: 10px;
   right: 10px;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.github-star-badge img {
+  height: 28px;
 }
 
 /* Modal Styling */
