@@ -47,7 +47,8 @@ addPayloadFieldButton.addEventListener("click", () => {
     const removeButton = document.createElement("button");
     removeButton.type = "button";
     removeButton.className = "btn-action remove remove-payload-field";
-    removeButton.textContent = "Remove";
+    removeButton.textContent = "\u00d7";
+    removeButton.setAttribute("aria-label", "Remove payload");
     removeButton.addEventListener("click", () => fieldDiv.remove());
     fieldDiv.append(keyInput, valueInput, removeButton);
     payloadContainer.appendChild(fieldDiv);
