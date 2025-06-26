@@ -20,3 +20,6 @@ export function saveDispatchHistory(dispatch) {
     history.push(dispatch);
     localStorage.setItem("dispatch_history", JSON.stringify(history));
 }
+export function clearDispatchHistory() {
+    localStorage.removeItem("dispatch_history");
+}
