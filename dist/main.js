@@ -10,6 +10,7 @@ const logHistoryCheckbox = document.getElementById("log-history");
 const loader = document.querySelector(".loading-container");
 const themeSwitch = document.getElementById("theme-switch");
 const clearHistoryButton = document.getElementById("clear-history");
+const confirmClearHistoryBtn = document.getElementById("confirm-clear-history-btn");
 const savedTheme = loadFromLocalStorage("theme");
 if (savedTheme === "dark") {
     document.body.classList.add("dark");
@@ -114,7 +115,17 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 if (clearHistoryButton) {
     clearHistoryButton.addEventListener("click", () => {
+        if (typeof MicroModal !== "undefined") {
+            MicroModal.show("confirm-clear-history");
+        }
+    });
+}
+if (confirmClearHistoryBtn) {
+    confirmClearHistoryBtn.addEventListener("click", () => {
         clearDispatchHistory();
         displayDispatchHistory([]);
+        if (typeof MicroModal !== "undefined") {
+            MicroModal.close("confirm-clear-history");
+        }
     });
 }
