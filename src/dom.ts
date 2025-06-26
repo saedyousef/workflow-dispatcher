@@ -37,12 +37,14 @@ export function showDispatchDetails(entry: DispatchHistoryEntry): void {
     const container = document.getElementById("dispatch-details-content") as HTMLElement;
     if (!container) return;
     container.innerHTML = `
-        <p><strong>Repository:</strong> ${entry.owner}/${entry.repo}</p>
-        <p><strong>Workflow:</strong> ${entry.workflow}</p>
-        <p><strong>Branch:</strong> ${entry.ref}</p>
-        <p><strong>Status:</strong> ${entry.status}</p>
-        <p><strong>Timestamp:</strong> ${formatTimestamp(entry.timestamp)}</p>
-        ${entry.errorMessage ? `<p><strong>Error:</strong> ${entry.errorMessage}</p>` : ""}
+        <ul class="details-list">
+            <li><span class="details-label">Repository</span><span>${entry.owner}/${entry.repo}</span></li>
+            <li><span class="details-label">Workflow</span><span>${entry.workflow}</span></li>
+            <li><span class="details-label">Branch</span><span>${entry.ref}</span></li>
+            <li><span class="details-label">Status</span><span class="${entry.status}">${entry.status}</span></li>
+            <li><span class="details-label">Timestamp</span><span>${formatTimestamp(entry.timestamp)}</span></li>
+            ${entry.errorMessage ? `<li><span class="details-label">Error</span><span>${entry.errorMessage}</span></li>` : ""}
+        </ul>
     `;
 
     if (entry.payload && Object.keys(entry.payload).length > 0) {
@@ -107,7 +109,7 @@ export function displayDispatchHistory(history: DispatchHistory): void {
         // Status cell
         const statusCell = document.createElement("td");
         statusCell.textContent = entry.status;
-        statusCell.style.color = entry.status === "success" ? "green" : "red";
+        statusCell.className = entry.status === "success" ? "success" : "failure";
 
         // Timestamp cell
         const timestampCell = document.createElement("td");

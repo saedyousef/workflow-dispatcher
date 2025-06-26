@@ -13,6 +13,7 @@ const logHistoryCheckbox = document.getElementById("log-history") as HTMLInputEl
 const loader = document.querySelector(".loading-container") as HTMLDivElement;
 const themeSwitch = document.getElementById("theme-switch") as HTMLInputElement;
 const clearHistoryButton = document.getElementById("clear-history") as HTMLButtonElement;
+const confirmClearHistoryBtn = document.getElementById("confirm-clear-history-btn") as HTMLButtonElement;
 
 const savedTheme = loadFromLocalStorage<string>("theme");
 if (savedTheme === "dark") {
@@ -133,7 +134,18 @@ window.addEventListener("DOMContentLoaded", () => {
 
 if (clearHistoryButton) {
     clearHistoryButton.addEventListener("click", () => {
+        if (typeof MicroModal !== "undefined") {
+            MicroModal.show("confirm-clear-history");
+        }
+    });
+}
+
+if (confirmClearHistoryBtn) {
+    confirmClearHistoryBtn.addEventListener("click", () => {
         clearDispatchHistory();
         displayDispatchHistory([]);
+        if (typeof MicroModal !== "undefined") {
+            MicroModal.close("confirm-clear-history");
+        }
     });
 }
