@@ -242,6 +242,8 @@ button {
 /* Dynamic payload container */
 #payload-container {
     flex-direction: column;
+    max-height: 300px;
+    overflow-y: auto;
 }
 
 #add-payload-field {
@@ -579,6 +581,8 @@ button {
     #payload-container {
         gap: 10px; /* Add spacing between payload fields */
         flex-wrap: wrap; /* Wrap payload fields */
+        max-height: 300px;
+        overflow-y: auto;
     }
 
     .payload-field {
@@ -685,15 +689,18 @@ button:disabled {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-height: 300px;
+}
+
+#dispatch-history-table-wrapper {
+    max-height: 400px;
     overflow-y: auto;
 }
 
-#dispatch-history-container::-webkit-scrollbar {
+#dispatch-history-table-wrapper::-webkit-scrollbar {
     width: 6px;
 }
 
-#dispatch-history-container::-webkit-scrollbar-thumb {
+#dispatch-history-table-wrapper::-webkit-scrollbar-thumb {
     background-color: #9494D1;
     border-radius: 10px;
 }
