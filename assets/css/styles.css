@@ -244,6 +244,7 @@ button {
     flex-direction: column;
     max-height: 300px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #add-payload-field {
@@ -699,7 +700,7 @@ button:disabled {
 }
 
 #dispatch-history-table-wrapper {
-    max-height: 400px;
+    max-height: 540px;
     overflow-y: auto;
 }
 
