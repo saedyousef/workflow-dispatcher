@@ -4,3 +4,4 @@
 
 # Exclude CSS files from language statistics
 *.css linguist-detectable=false
+*.html linguist-detectable=false
