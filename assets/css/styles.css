@@ -188,8 +188,8 @@ input[type="checkbox"]:checked + label {
 /* Wider container */
 .container {
     margin-top: 70px;
-    max-width: 1600px;
-    width: 98%;
+    max-width: 1800px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -359,6 +359,16 @@ button {
     .remove-payload-field {
         min-width: 32px;
         min-height: 32px;
+    }
+
+    /* Smaller toggle switches on narrow screens */
+    input[type="checkbox"] + label {
+        width: 40px;
+        height: 24px;
+    }
+    input[type="checkbox"] + label::after {
+        height: 8px;
+        width: 8px;
     }
 }
 
@@ -728,9 +738,19 @@ button:disabled {
     align-items: center;
 }
 
-#clear-history.small {
-    padding: 4px 8px;
-    font-size: 12px;
+#clear-history {
+    padding: 6px 14px;
+    font-size: 14px;
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#clear-history:hover {
+    background-color: #c82333;
 }
 
 #dispatch-history-table-wrapper {
