@@ -32,6 +32,19 @@ if (savedPat) {
     document.getElementById("pat").value = savedPat;
     savePatCheckbox.checked = true;
 }
+// Load log history preference
+const savedLogPref = loadFromLocalStorage("log_history_enabled");
+if (savedLogPref) {
+    logHistoryCheckbox.checked = true;
+}
+logHistoryCheckbox.addEventListener("change", () => {
+    if (logHistoryCheckbox.checked) {
+        saveToLocalStorage("log_history_enabled", true);
+    }
+    else {
+        localStorage.removeItem("log_history_enabled");
+    }
+});
 // Add payload field dynamically
 addPayloadFieldButton.addEventListener("click", () => {
     const fieldDiv = document.createElement("div");
@@ -88,8 +101,10 @@ form.addEventListener("submit", async (event) => {
             status: response.ok ? Status.Success : Status.Failure,
             errorMessage: response.ok ? null : "Workflow dispatch failed.",
         };
-        // Save log and refresh table
-        saveDispatchHistory(logEntry);
+        // Save log and refresh table if enabled
+        if (logHistoryCheckbox.checked) {
+            saveDispatchHistory(logEntry);
+        }
         displayDispatchHistory(loadFromLocalStorage("dispatch_history") || []);
     }
     catch (error) {
