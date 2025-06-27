@@ -27,6 +27,14 @@ npx tsc
 
 This produces JavaScript files in the `dist/` directory which are referenced by `index.html`.
 
+### Tests
+
+Unit tests cover the TypeScript source files and can be run with:
+
+```bash
+npm test
+```
+
 ### Usage
 
 1. Enter the repository owner, name and workflow filename (e.g. `deploy.yml`).
